@@ -10,7 +10,8 @@ function execute150000TimesLoop() {
         for (let i = 0; i < 150000; i++) {
             
         }
-        resolve("done executing execute150000TimesLoop function");
+        // resolve("done executing execute150000TimesLoop function");
+        reject("failed executing execute150000TimesLoop function");
     });
 }
 
@@ -39,6 +40,6 @@ Promise.all([timeoutPromise, loopPromise]).then(allPromisesRes => {
     console.log(allPromisesRes);
     console.log("All Promises Executed Successfully");
 }).catch(allPromisesError => {
-
+    console.log(allPromisesError);
 });
 /** Same functionality like above but minimum lines of code*/
