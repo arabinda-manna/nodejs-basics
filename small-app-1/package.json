@@ -1,0 +1,11 @@
+{
+  "name": "small-app-1",
+  "version": "1.0.0",
+  "description": "Small application which will print the second argument variable",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arabinda Manna",
+  "license": "ISC"
+}
