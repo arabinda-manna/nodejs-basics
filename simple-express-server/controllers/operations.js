@@ -24,5 +24,18 @@ function stringCharacterCalc(str) {
     return JSON.stringify(output);
 }
 
+function isAmstrong(num) {
+    let numArr = num.split("");
+    // console.log(numArr);
+    
+    let sum = numArr.reduce((sum, num) => sum + Math.pow(num,3), 0);
+    if(sum == parseInt(num)){
+        return num + " is a Amstrong number";
+    }else{
+        return num + " is not a Amstrong number";
+    } 
+}
+
 exports.first10Multiples = first10Multiples;
 exports.stringCharacterCalc = stringCharacterCalc;
+exports.isAmstrong = isAmstrong;

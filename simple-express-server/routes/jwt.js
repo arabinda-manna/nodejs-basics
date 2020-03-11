@@ -2,13 +2,14 @@ const express = require("express");
 const route = express();
 
 const { generateJWT, validateJWT } = require("../controllers/jwt");
+const { getBearerToken } = require("../library/headerUtils");
 
 route.post('/', (req, res) => {
-    try{
-        console.log(req.body);   
+    try {
+        console.log(req.body);
         let token = generateJWT(req.body);
-        res.send(token);
-    }catch(e){
+        res.json({ "status": "SUCCESS", "access_token": token });
+    } catch (e) {
         console.log(e);
         res.sendStatus(500);
     }
@@ -16,14 +17,19 @@ route.post('/', (req, res) => {
 
 route.post('/validate', (req, res) => {
     try {
-        let status = validateJWT(req.body.token);
-        if(status){
-            res.send("True");
-        }else{
-            res.send("False");
+        // console.log(req.get("Authorization"));
+        let token = getBearerToken(req);
+        if (token) {
+            if (validateJWT(token)) {
+                res.send("True");
+            } else {
+                res.send("False");
+            }
+        } else {
+            res.status(403).send({ "status": "ERROR", "message": "Please Pass a valid bearer Token in Authorization Header" });
         }
     } catch (error) {
-        console.log(e);
+        console.log(error);
         res.sendStatus(500);
     }
 });
