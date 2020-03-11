@@ -5,14 +5,32 @@ const { first10Multiples, stringCharacterCalc, isAmstrong } = require("../contro
 const { validateJWT } = require("../controllers/jwt");
 const { getBearerToken } = require("../library/headerUtils");
 
-route.get('/first10Multiples/:num', (req, res) => {
+const Joi = require('@hapi/joi');
+
+route.get('/first10Multiples/:num', async (req, res) => {
     try {
         // console.log(req.params.num);
         if (!validatePermission(req)){
             res.status(403).send({ "status": "ERROR", "message": "Please Pass a valid bearer Token in Authorization Header" });
             return false;
         }
-        
+
+        const schema = Joi.object({
+            num: Joi.number()
+                .integer()
+                .min(0)
+                .max(10)
+                .required(),
+        });
+        try {
+            const value = await schema.validateAsync(req.params);
+            console.log(value);
+        }
+        catch (err) {
+            res.status(401).send({"status": "ERROR", "message": "Invalid number passed. Number must be between 0-10"})
+            return false;
+        }
+
         res.send(first10Multiples(req.params.num));
     } catch (e) {
         console.log(e);
@@ -20,7 +38,7 @@ route.get('/first10Multiples/:num', (req, res) => {
     }
 });
 
-route.post('/stringCharacterCalc', (req, res) => {
+route.post('/stringCharacterCalc', async (req, res) => {
     try {
         // console.log(req.body.string);
         if (!validatePermission(req)) {
@@ -28,6 +46,20 @@ route.post('/stringCharacterCalc', (req, res) => {
             return false;
         }
         
+        const schema = Joi.object({
+            string: Joi.string()
+                .min(1)
+                .max(256).required(),
+        });
+        try {
+            const value = await schema.validateAsync(req.body);
+            console.log(value);
+        }
+        catch (err) {
+            res.status(401).send({ "status": "ERROR", "message": "Invalid string passed. String must have length between 1-256" })
+            return false;
+        }
+
         res.send(stringCharacterCalc(req.body.string));
     } catch (e) {
         console.log(e);
@@ -35,11 +67,27 @@ route.post('/stringCharacterCalc', (req, res) => {
     }
 });
 
-route.get('/isAmstrong/:num', (req, res) => {
+route.get('/isAmstrong/:num', async (req, res) => {
     try {
         // console.log(req.params.num);
         if (!validatePermission(req)) {
             res.status(403).send({ "status": "ERROR", "message": "Please Pass a valid bearer Token in Authorization Header" });
+            return false;
+        }
+
+        const schema = Joi.object({
+            num: Joi.number()
+                .integer()
+                .min(0)
+                .max(10000000)
+                .required(),
+        });
+        try {
+            const value = await schema.validateAsync(req.params);
+            console.log(value);
+        }
+        catch (err) {
+            res.status(401).send({ "status": "ERROR", "message": "Invalid number passed. Number must be between 0-10000000" })
             return false;
         }
 
