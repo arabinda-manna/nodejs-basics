@@ -17,19 +17,31 @@ const setManagerByProjectName = async (projectName, manager_id) => {
 
 const getEngineersByProjectName = async (projectName) => {
     try{
-        let projectRes = await models.Project.findOne({
+        // let projectRes = await models.Project.findOne({
+        //     where: {
+        //         name: projectName
+        //     }
+        // });
+
+        // let engineersRes = await models.Engineer.findAll({
+        //     where: {
+        //         project_id: projectRes.dataValues.id
+        //     }
+        // });
+
+        // engineersRes.forEach(engineer => console.log(engineer.dataValues));
+
+        let projectRes = await models.Project.findAll({
             where: {
                 name: projectName
-            }
+            },
+            include: [models.Engineer]
         });
-
-        let engineersRes = await models.Engineer.findAll({
-            where: {
-                project_id: projectRes.dataValues.id
-            }
+        projectRes.forEach(project => {
+            // console.log(project);       
+            project.Engineers.forEach(engineer => console.log(engineer.dataValues))
         });
-
-        engineersRes.forEach(engineer => console.log(engineer.dataValues));
+        
     }catch(e){
         console.log(e);
     }
@@ -55,7 +67,7 @@ const deleteProjectById = async (projectId) => {
 // setManagerByProjectName("Keyless Project", 2);
 
 //Fetching all Engineers under one project name
-// getEngineersByProjectName("Keyless Project");
+getEngineersByProjectName("Billing Project");
  
 //Deleting project by Id
-deleteProjectById(2);
+// deleteProjectById(2);

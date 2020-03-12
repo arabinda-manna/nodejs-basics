@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
     const Manager = sequelize.define('Manager', {
         name: DataTypes.STRING
-    }, {});
+    }, { tableName: 'Managers' });
     Manager.associate = function (models) {
         // associations can be defined here
         Manager.hasOne(models.Project, { foreignKey: 'manager_id' });
