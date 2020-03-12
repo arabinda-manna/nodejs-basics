@@ -5,7 +5,8 @@
     "database": "test_sequelize_dev",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "operatorsAliases": 0
+    "operatorsAliases": 0,
+    "logging": 0
   },
   "test": {
     "username": "postgres",
@@ -13,7 +14,8 @@
     "database": "test_sequelize_test",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "operatorsAliases": 0
+    "operatorsAliases": 0,
+    "logging": 0
   },
   "production": {
     "username": "postgres",
@@ -21,6 +23,7 @@
     "database": "test_sequelize_prod",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "operatorsAliases": 0
+    "operatorsAliases": 0,
+    "logging": 0
   }
 }
