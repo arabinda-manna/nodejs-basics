@@ -1,22 +1,18 @@
 //Javascript Callback Function implementation
-function success_error_handle_callback(status=false, message, successCallBack, errorCallBack){
+function success_error_handle_callback(status=false, message, callBack){
     if(status){
-        successCallBack(message);
+        callBack('Success : ' + message);
     }else{
-        errorCallBack(message);
+        callBack('Error : ' + message);
     }
 }
 
-function successCallBack(message){
-    console.log('Success : ', message);
-}
-
-function errorCallBack(message){
-    console.log('Error : ', message);
+function callBack(message){
+    console.log(message);
 }
 
 // let status = true;
 // let message = "Successfully Implemented Callbacks";
 let status = false;
 let message = "Failed to Implement Callbacks";
-success_error_handle_callback(status, message, successCallBack, errorCallBack);
+success_error_handle_callback(status, message, callBack);
