@@ -20,12 +20,12 @@ route.post('/validate', (req, res) => {
         // console.log(req.get("Authorization"));
         let token = getBearerToken(req);
         // console.log(token);
-        
+
         if (token) {
             if (validateJWT(token)) {
-                res.send({ "status":"True" });
+                res.send({ "status": "True" });
             } else {
-                res.send({ "status":"False" });
+                res.send({ "status": "False" });
             }
         } else {
             res.status(403).send({ "status": "ERROR", "message": "Please Pass a valid bearer Token in Authorization Header" });
