@@ -37,3 +37,11 @@ describe("first10MultiplesInputValidate method Unit Testing", () => {
         }
     });
 });
+
+describe("first10Multiples method Unit Testing", () => {
+    it("Positive Tests", () =>{
+        assert.equal(first10Multiples(1), "1 1 1 1 1 1 1 1 1 1"); //1's power series upto 10 power
+        assert.equal(first10Multiples(2), "2 4 8 16 32 64 128 256 512 1024");
+        assert.equal(first10Multiples(10), "10 100 1000 10000 100000 1000000 10000000 100000000 1000000000 10000000000");
+    })
+});
