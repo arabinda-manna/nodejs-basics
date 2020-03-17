@@ -1,7 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
     const Project = sequelize.define('Project', {
-        name: DataTypes.STRING
+        name: DataTypes.STRING,
+        manager_id: DataTypes.INTEGER
     }, { tableName: 'Projects' });
     Project.associate = function (models) {
         // associations can be defined here
