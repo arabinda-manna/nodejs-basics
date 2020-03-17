@@ -1,0 +1,209 @@
+{
+	"info": {
+		"_postman_id": "e297c9fc-a928-4fd7-8743-341a5fbd80b4",
+		"name": "simple express app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "generate jwt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\":\"Arabinda\",\n\t\"lastName\": \"Manna\",\n\t\"age\": 25\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/jwt/",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"jwt",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "validate jwt",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJBcmFiaW5kYSIsImxhc3ROYW1lIjoiTWFubmEiLCJhZ2UiOjI1LCJpYXQiOjE1ODM5Mjk2MTIsImV4cCI6MTU4MzkyOTczMiwiYXVkIjoibG9jYWxob3N0IiwiaXNzIjoibG9jYWxob3N0IiwianRpIjoiYWhpQWQifQ.AU8hKXxJbV5qZs_IQwzzDP6jiMVSPlpS2fuVU66IQ38",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\":\"Arabinda\",\n\t\"lastName\": \"Manna\",\n\t\"age\": 25\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/jwt/validate",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"jwt",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "first10Multiples",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJBcmFiaW5kYSIsImxhc3ROYW1lIjoiTWFubmEiLCJhZ2UiOjI1LCJpYXQiOjE1ODQ0Mjk1OTcsImV4cCI6MTU4NDQzMDE5NywiYXVkIjoibG9jYWxob3N0IiwiaXNzIjoibG9jYWxob3N0IiwianRpIjoiSyFQSlEifQ.LFJYW7BqJtInWDawMRl7ayyXlQ1hY5G98TIScXDsWDA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8082/operations/first10Multiples/10",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"operations",
+						"first10Multiples",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stringCharacterCalc",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJBcmFiaW5kYSIsImxhc3ROYW1lIjoiTWFubmEiLCJhZ2UiOjI1LCJpYXQiOjE1ODQ0Mjk1OTcsImV4cCI6MTU4NDQzMDE5NywiYXVkIjoibG9jYWxob3N0IiwiaXNzIjoibG9jYWxob3N0IiwianRpIjoiSyFQSlEifQ.LFJYW7BqJtInWDawMRl7ayyXlQ1hY5G98TIScXDsWDA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"string\": \"Arabinda Manna\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/operations/stringCharacterCalc",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"operations",
+						"stringCharacterCalc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "isAmstrong",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJBcmFiaW5kYSIsImxhc3ROYW1lIjoiTWFubmEiLCJhZ2UiOjI1LCJpYXQiOjE1ODQ0Mjk1OTcsImV4cCI6MTU4NDQzMDE5NywiYXVkIjoibG9jYWxob3N0IiwiaXNzIjoibG9jYWxob3N0IiwianRpIjoiSyFQSlEifQ.LFJYW7BqJtInWDawMRl7ayyXlQ1hY5G98TIScXDsWDA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8082/operations/isAmstrong/153",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"operations",
+						"isAmstrong",
+						"153"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
