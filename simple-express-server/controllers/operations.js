@@ -1,3 +1,22 @@
+const Joi = require('@hapi/joi');
+async function first10MultiplesInputValidate(inputs){
+    const schema = Joi.object({
+        num: Joi.number()
+            .integer()
+            .min(0)
+            .max(10)
+            .required(),
+    });
+    try {
+        const value = await schema.validateAsync(inputs);
+        // console.log(value);
+        return {"status":true};
+    }
+    catch (err) {
+        return { "status": false, "message": "Invalid number passed. Number must be between 0-10"};
+    }
+}
+
 function first10Multiples(num) {
     let output = "";
     for (let i = 1; i <= 10; i++) {
@@ -7,6 +26,23 @@ function first10Multiples(num) {
         output += Math.pow(num, i).toString();
     }
     return output;
+}
+
+async function stringCharacterCalcInputValidate(inputs) {
+    const schema = Joi.object({
+        string: Joi.string()
+            .min(1)
+            .max(256).required(),
+    });
+
+    try {
+        const value = await schema.validateAsync(inputs);
+        // console.log(value);
+        return { "status": true };
+    }
+    catch (err) {
+        return { "status": false, "message": "Invalid string passed. String must have length between 1-256" };
+    }
 }
 
 function stringCharacterCalc(str) {
@@ -24,6 +60,25 @@ function stringCharacterCalc(str) {
     return JSON.stringify(output);
 }
 
+async function isAmstrongInputValidate(inputs) {
+    const schema = Joi.object({
+        num: Joi.number()
+            .integer()
+            .min(0)
+            .max(10000000)
+            .required(),
+    });
+
+    try {
+        const value = await schema.validateAsync(inputs);
+        // console.log(value);
+        return { "status": true };
+    }
+    catch (err) {
+        return { "status": false, "message": "Invalid number passed. Number must be between 0-10000000" };
+    }
+}
+
 function isAmstrong(num) {
     let numArr = num.split("");
     // console.log(numArr);
@@ -36,6 +91,9 @@ function isAmstrong(num) {
     } 
 }
 
-exports.first10Multiples = first10Multiples;
-exports.stringCharacterCalc = stringCharacterCalc;
-exports.isAmstrong = isAmstrong;
+module.exports = { first10MultiplesInputValidate, first10Multiples, stringCharacterCalcInputValidate, stringCharacterCalc, isAmstrongInputValidate, isAmstrong};
+// module.exports = { "first10MultiplesInputValidate": first10MultiplesInputValidate, "first10Multiples": first10Multiples, "stringCharacterCalc": stringCharacterCalc, "isAmstrong":isAmstrong};
+// exports.first10MultiplesInputValidate = first10MultiplesInputValidate;
+// exports.first10Multiples = first10Multiples;
+// exports.stringCharacterCalc = stringCharacterCalc;
+// exports.isAmstrong = isAmstrong;

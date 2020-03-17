@@ -1,11 +1,9 @@
 const express = require("express");
 const route = express();
 
-const { first10Multiples, stringCharacterCalc, isAmstrong } = require("../controllers/operations");
+const { first10MultiplesInputValidate, first10Multiples, stringCharacterCalcInputValidate, stringCharacterCalc, isAmstrongInputValidate, isAmstrong } = require("../controllers/operations");
 const { validateJWT } = require("../controllers/jwt");
 const { getBearerToken } = require("../library/headerUtils");
-
-const Joi = require('@hapi/joi');
 
 route.get('/first10Multiples/:num', async (req, res) => {
     try {
@@ -15,19 +13,10 @@ route.get('/first10Multiples/:num', async (req, res) => {
             return false;
         }
 
-        const schema = Joi.object({
-            num: Joi.number()
-                .integer()
-                .min(0)
-                .max(10)
-                .required(),
-        });
-        try {
-            const value = await schema.validateAsync(req.params);
-            console.log(value);
-        }
-        catch (err) {
-            res.status(401).send({"status": "ERROR", "message": "Invalid number passed. Number must be between 0-10"})
+        const validationData = await first10MultiplesInputValidate(req.params);
+        
+        if (!validationData.status){
+            res.status(401).send({ "status": "ERROR", "message": validationData.message });
             return false;
         }
 
@@ -46,17 +35,10 @@ route.post('/stringCharacterCalc', async (req, res) => {
             return false;
         }
         
-        const schema = Joi.object({
-            string: Joi.string()
-                .min(1)
-                .max(256).required(),
-        });
-        try {
-            const value = await schema.validateAsync(req.body);
-            console.log(value);
-        }
-        catch (err) {
-            res.status(401).send({ "status": "ERROR", "message": "Invalid string passed. String must have length between 1-256" })
+        const validationData = await stringCharacterCalcInputValidate(req.body);
+
+        if (!validationData.status) {
+            res.status(401).send({ "status": "ERROR", "message": validationData.message });
             return false;
         }
 
@@ -75,19 +57,10 @@ route.get('/isAmstrong/:num', async (req, res) => {
             return false;
         }
 
-        const schema = Joi.object({
-            num: Joi.number()
-                .integer()
-                .min(0)
-                .max(10000000)
-                .required(),
-        });
-        try {
-            const value = await schema.validateAsync(req.params);
-            console.log(value);
-        }
-        catch (err) {
-            res.status(401).send({ "status": "ERROR", "message": "Invalid number passed. Number must be between 0-10000000" })
+        const validationData = await isAmstrongInputValidate(req.params);
+
+        if (!validationData.status) {
+            res.status(401).send({ "status": "ERROR", "message": validationData.message });
             return false;
         }
 
