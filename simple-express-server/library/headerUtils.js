@@ -5,14 +5,14 @@ const getAuthorizationHeader = (req) => {
 
 const getBearerToken = (req) => {
     let authorization = getAuthorizationHeader(req);
-    if (authorization != undefined){
+    if (authorization != undefined) {
         let token = authorization.split(' ');
         if (token[0] == "Bearer") {
             return token[1];
-        }else{
+        } else {
             return null;
         }
-    }else{
+    } else {
         return null;
     }
 }

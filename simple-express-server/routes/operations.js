@@ -8,14 +8,14 @@ const { getBearerToken } = require("../library/headerUtils");
 route.get('/first10Multiples/:num', async (req, res) => {
     try {
         // console.log(req.params.num);
-        if (!validatePermission(req)){
+        if (!validatePermission(req)) {
             res.status(403).send({ "status": "ERROR", "message": "Please Pass a valid bearer Token in Authorization Header" });
             return false;
         }
 
         const validationData = await first10MultiplesInputValidate(req.params);
-        
-        if (!validationData.status){
+
+        if (!validationData.status) {
             res.status(401).send({ "status": "ERROR", "message": validationData.message });
             return false;
         }
@@ -34,7 +34,7 @@ route.post('/stringCharacterCalc', async (req, res) => {
             res.status(403).send({ "status": "ERROR", "message": "Please Pass a valid bearer Token in Authorization Header" });
             return false;
         }
-        
+
         const validationData = await stringCharacterCalcInputValidate(req.body);
 
         if (!validationData.status) {

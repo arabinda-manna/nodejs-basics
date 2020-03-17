@@ -1,5 +1,5 @@
 const Joi = require('@hapi/joi');
-async function first10MultiplesInputValidate(inputs){
+async function first10MultiplesInputValidate(inputs) {
     const schema = Joi.object({
         num: Joi.number()
             .integer()
@@ -9,18 +9,18 @@ async function first10MultiplesInputValidate(inputs){
     });
     try {
         await schema.validateAsync(inputs);
-        return {"status":true};
+        return { "status": true };
     }
     catch (err) {
         // console.log(err);
-        return { "status": false, "message": "Invalid number passed. Number must be between 0-10"};
+        return { "status": false, "message": "Invalid number passed. Number must be between 0-10" };
     }
 }
 
 function first10Multiples(num) {
     let output = "";
     for (let i = 1; i <= 10; i++) {
-        if(i !== 1){
+        if (i !== 1) {
             output += " ";
         }
         output += Math.pow(num, i).toString();
@@ -50,13 +50,13 @@ function stringCharacterCalc(str) {
     let output = {};
     strArr.forEach(element => {
         element = element.toLowerCase();
-        if(output[element] != undefined){
+        if (output[element] != undefined) {
             output[element]++;
-        }else{
+        } else {
             output[element] = 1;
         }
     });
-    
+
     return JSON.stringify(output);
 }
 
@@ -82,16 +82,16 @@ async function isAmstrongInputValidate(inputs) {
 function isAmstrong(num) {
     let numArr = num.toString().split("");
     // console.log(numArr);
-    
-    let sum = numArr.reduce((sum, num) => sum + Math.pow(num,3), 0);
-    if(sum == parseInt(num)){
+
+    let sum = numArr.reduce((sum, num) => sum + Math.pow(num, 3), 0);
+    if (sum == parseInt(num)) {
         return num + " is a Amstrong number";
-    }else{
+    } else {
         return num + " is not a Amstrong number";
-    } 
+    }
 }
 
-module.exports = { first10MultiplesInputValidate, first10Multiples, stringCharacterCalcInputValidate, stringCharacterCalc, isAmstrongInputValidate, isAmstrong};
+module.exports = { first10MultiplesInputValidate, first10Multiples, stringCharacterCalcInputValidate, stringCharacterCalc, isAmstrongInputValidate, isAmstrong };
 // module.exports = { "first10MultiplesInputValidate": first10MultiplesInputValidate, "first10Multiples": first10Multiples, "stringCharacterCalc": stringCharacterCalc, "isAmstrong":isAmstrong};
 // exports.first10MultiplesInputValidate = first10MultiplesInputValidate;
 // exports.first10Multiples = first10Multiples;
