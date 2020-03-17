@@ -8,11 +8,11 @@ async function first10MultiplesInputValidate(inputs){
             .required(),
     });
     try {
-        const value = await schema.validateAsync(inputs);
-        // console.log(value);
+        await schema.validateAsync(inputs);
         return {"status":true};
     }
     catch (err) {
+        // console.log(err);
         return { "status": false, "message": "Invalid number passed. Number must be between 0-10"};
     }
 }
@@ -36,7 +36,7 @@ async function stringCharacterCalcInputValidate(inputs) {
     });
 
     try {
-        const value = await schema.validateAsync(inputs);
+        await schema.validateAsync(inputs);
         // console.log(value);
         return { "status": true };
     }
@@ -70,7 +70,7 @@ async function isAmstrongInputValidate(inputs) {
     });
 
     try {
-        const value = await schema.validateAsync(inputs);
+        await schema.validateAsync(inputs);
         // console.log(value);
         return { "status": true };
     }
