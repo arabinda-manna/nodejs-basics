@@ -6,11 +6,11 @@ const { getBearerToken } = require("../library/headerUtils");
 
 route.post('/', (req, res) => {
     try {
-        console.log(req.body);
+        // console.log(req.body);
         let token = generateJWT(req.body);
         res.json({ "status": "SUCCESS", "access_token": token });
     } catch (e) {
-        console.log(e);
+        // console.log(e);
         res.sendStatus(500);
     }
 });
