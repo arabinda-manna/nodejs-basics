@@ -80,7 +80,7 @@ async function isAmstrongInputValidate(inputs) {
 }
 
 function isAmstrong(num) {
-    let numArr = num.split("");
+    let numArr = num.toString().split("");
     // console.log(numArr);
     
     let sum = numArr.reduce((sum, num) => sum + Math.pow(num,3), 0);
