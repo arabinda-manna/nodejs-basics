@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 
 const jwtRoute = require("./routes/jwt");
 const operationsRoute = require("./routes/operations");
-app.use('/jwt',jwtRoute.route);
+app.use('/jwt', jwtRoute.route);
 app.use('/operations', operationsRoute.route);
 app.get('/', (req, res) => {
     res.send('Hello World!');
