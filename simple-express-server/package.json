@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon",
     "test": "mocha --recursive --exit || true",
-    "start": "node ./"
+    "start": "node ./",
+    "coverage": "nyc npm run test"
   },
   "author": "Arabinda Manna",
   "license": "ISC",
