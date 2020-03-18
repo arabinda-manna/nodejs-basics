@@ -3,13 +3,19 @@ function print_json(obj, key = null, index) {
     // console.log(typeof obj);
     const commaPresent = (index > 0 ? "," : "")
 
-    if (typeof obj === "string") {
+    if (typeof obj == "string") {
         if(key){
             return commaPresent + "\"" + key + "\"" + ":" + "\"" + obj + "\"";
         }else{
+            return commaPresent + "\"" + obj + "\"";
+        }
+    } else if (typeof obj == "number") {
+        if (key) {
+            return commaPresent + "\"" + key + "\"" + ":" + obj;
+        } else {
             return commaPresent + obj;
         }
-    } else if (typeof obj === "number") {
+    } else if (typeof obj == "boolean") {
         if (key) {
             return commaPresent + "\"" + key + "\"" + ":" + obj;
         } else {
@@ -21,7 +27,7 @@ function print_json(obj, key = null, index) {
         } else {
             return commaPresent + "null";
         }
-    }else if (typeof obj === "object"){
+    }else if (typeof obj == "object"){
         if(obj instanceof Array){
             let returnData = "[";
             for (let i = 0; i < obj.length; i++) {
@@ -54,5 +60,6 @@ function print_json(obj, key = null, index) {
     }
 }
 
-let object = { "firstName": "Arabinda", "lastName": "Manna", "age": 25, "height": null, "weight": undefined, "chest": [56,38,null], null: null, abc: "abc" };
+// let object = { "firstName": "Arabinda", "lastName": "Manna", "age": 25, "height": null, "weight": undefined, "chest": [56,38,null], null: null, abc: "abc" };
+let object = { a: 'Abhsek', b: null, c: undefined, d: true, e: { a: 1, b: [1, "2", "Abc"] } };
 console.log(print_json(object));
