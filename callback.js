@@ -1,13 +1,18 @@
 //Javascript Callback Function implementation
 function success_error_handle_callback(status=false, message, callBack){
     if(status){
-        callBack('Success : ' + message);
+        callBack(null, 'Success : ' + message);
     }else{
-        callBack('Error : ' + message);
+        callBack({"message" : 'Error : ' + message});
     }
 }
 
-function callBack(message){
+function callBack(error, message){
+    if(error){
+        console.log(error.message);
+        return;
+    }
+    
     console.log(message);
 }
 
