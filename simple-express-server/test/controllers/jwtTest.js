@@ -3,6 +3,8 @@ const { assert, expect } = chai;
 const chaiJWT = require('chai-jwt');
 
 const { generateJWT, validateJWT } = require("../../controllers/jwt");
+const sinon = require("sinon");
+const jwt = require('jsonwebtoken');
 
 describe("Generate JWT Token Unit Testing", () => {
     chai.use(chaiJWT);
@@ -18,9 +20,18 @@ describe("Validate JWT Token Unit Testing", () => {
         const result = validateJWT(token);
         expect(result).to.true;
     });
-    it("Negetive Test of JWT Token Validation", () => {
+    it("Negetive Test of JWT Token Validation with JsonWebTokenError", () => {
         const token = generateJWT({ "id": 1 });
         const result = validateJWT(token + 1); //adding gurbage to token to falsify test
         assert.isNotTrue(result);
+    });
+    it("Negetive Test of JWT Token Validation with unknown error", () => {
+        const error = new Error("verify throws unknown type error");
+        sinon.stub(jwt, "verify").throws(error);
+        
+        const token = generateJWT({ "id": 1 });
+        const result = validateJWT(token + 1); //adding gurbage to token to falsify test
+        assert.isNotTrue(result);
+        jwt.verify.restore();
     });
 });
