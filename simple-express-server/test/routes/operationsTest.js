@@ -4,6 +4,9 @@ chai.use(chaiHttp);
 const app = require("../../index");
 const expect = chai.expect;
 
+const operationsController = require("../../controllers/operations");
+const sinon = require("sinon");
+
 describe("operations controller Integration Testing", () => {
     let token = null; //to be use to call apis later
     before((done) => {
@@ -37,6 +40,56 @@ describe("operations controller Integration Testing", () => {
                     done();
                 });
         });
+        it("Negetive output test without authorization header", (done) => {
+            chai
+                .request(app)
+                .get('/operations/first10Multiples/1')
+                .end((err, res) => {
+                    // console.log(res);
+                    expect(err).to.be.null;
+                    expect(res).to.have.status(403);
+                    done();
+                });
+        });
+        it("Negetive output test with input error", (done) => {
+            chai
+                .request(app)
+                .get('/operations/first10Multiples/100')
+                .set('Authorization', 'Bearer ' + token)
+                .end((err, res) => {
+                    // console.log(res);
+                    expect(err).to.be.null;
+                    expect(res).to.have.status(401);
+                    done();
+                });
+        });
+        it("Negetive output test with throwing error", (done) => {
+            const error = new Error("first10Multiples throws an error");
+            sinon.stub(operationsController, "first10Multiples").throws(error);
+            chai
+                .request(app)
+                .get('/operations/first10Multiples/1')
+                .set('Authorization', 'Bearer ' + token)
+                .end((err, res) => {
+                    // console.log(res);
+                    expect(err).to.be.null;
+                    expect(res).to.have.status(500);
+                    operationsController.first10Multiples.restore();
+                    done();
+                });
+        });
+        it("Negetive output test with expired authorization header", (done) => {
+            chai
+                .request(app)
+                .get('/operations/first10Multiples/1')
+                .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJBcmFiaW5kYSIsImxhc3ROYW1lIjoiTWFubmEiLCJhZ2UiOjI1LCJpYXQiOjE1ODQ0NDk3MjksImV4cCI6MTU4NDQ1MDMyOSwiYXVkIjoibG9jYWxob3N0IiwiaXNzIjoibG9jYWxob3N0IiwianRpIjoiR2x1YU0ifQ.GNWHXggfh23BPx466wLl5NdgYKw9caieLeFYmlvypz4')
+                .end((err, res) => {
+                    // console.log(res);
+                    expect(err).to.be.null;
+                    expect(res).to.have.status(403);
+                    done();
+                });
+        });
     });
 
     describe("/operations/stringCharacterCalc endpoint Integration Testing", () => {
@@ -57,6 +110,72 @@ describe("operations controller Integration Testing", () => {
                     done();
                 });
         });
+        it("Negetive output test without authorization header", (done) => {
+            chai
+            .request(app)
+                .post('/operations/stringCharacterCalc')
+                .set('content-type', 'application/json')
+                .send({
+                    "string": "NodeJs"
+                })
+                .end((err, res) => {
+                    // console.log(res);
+                    expect(err).to.be.null;
+                    expect(res).to.have.status(403);
+                    done();
+                });
+        });
+        it("Negetive output test with input error", (done) => {
+            chai
+                .request(app)
+                .post('/operations/stringCharacterCalc')
+                .set('content-type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .send({
+                    "string": ""
+                })
+                .end((err, res) => {
+                    // console.log(res);
+                    expect(err).to.be.null;
+                    expect(res).to.have.status(401);
+                    done();
+                });
+        });
+        it("Negetive output test with throwing error", (done) => {
+            const error = new Error("stringCharacterCalc throws an error");
+            sinon.stub(operationsController, "stringCharacterCalc").throws(error);
+            chai
+                .request(app)
+                .post('/operations/stringCharacterCalc')
+                .set('content-type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .send({
+                    "string": "NodeJs"
+                })
+                .end((err, res) => {
+                    // console.log(res);
+                    expect(err).to.be.null;
+                    expect(res).to.have.status(500);
+                    operationsController.stringCharacterCalc.restore();
+                    done();
+                });
+        });
+        it("Negetive output test with expired authorization header", (done) => {
+            chai
+                .request(app)
+                .post('/operations/stringCharacterCalc')
+                .set('content-type', 'application/json')
+                .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJBcmFiaW5kYSIsImxhc3ROYW1lIjoiTWFubmEiLCJhZ2UiOjI1LCJpYXQiOjE1ODQ0NDk3MjksImV4cCI6MTU4NDQ1MDMyOSwiYXVkIjoibG9jYWxob3N0IiwiaXNzIjoibG9jYWxob3N0IiwianRpIjoiR2x1YU0ifQ.GNWHXggfh23BPx466wLl5NdgYKw9caieLeFYmlvypz4')
+                .send({
+                    "string": "NodeJs"
+                })
+                .end((err, res) => {
+                    // console.log(res);
+                    expect(err).to.be.null;
+                    expect(res).to.have.status(403);
+                    done();
+                });
+        });
     });
 
     describe("/operations/isAmstrong/:num endpoint Integration Testing", () => {
@@ -70,6 +189,56 @@ describe("operations controller Integration Testing", () => {
                     expect(err).to.be.null;
                     expect(res).to.have.status(200);
                     expect(res.text).to.be.equal("153 is a Amstrong number");
+                    done();
+                });
+        });
+        it("Negetive output test without authorization header", (done) => {
+            chai
+            .request(app)
+                .get('/operations/isAmstrong/153')
+                .end((err, res) => {
+                    // console.log(res);
+                    expect(err).to.be.null;
+                    expect(res).to.have.status(403);
+                    done();
+                });
+        });
+        it("Negetive output test with input error", (done) => {
+            chai
+                .request(app)
+                .get('/operations/isAmstrong/-100')
+                .set('Authorization', 'Bearer ' + token)
+                .end((err, res) => {
+                    // console.log(res);
+                    expect(err).to.be.null;
+                    expect(res).to.have.status(401);
+                    done();
+                });
+        });
+        it("Negetive output test with throwing error", (done) => {
+            const error = new Error("isAmstrong throws an error");
+            sinon.stub(operationsController, "isAmstrong").throws(error);
+            chai
+                .request(app)
+                .get('/operations/isAmstrong/153')
+                .set('Authorization', 'Bearer ' + token)
+                .end((err, res) => {
+                    // console.log(res);
+                    expect(err).to.be.null;
+                    expect(res).to.have.status(500);
+                    operationsController.isAmstrong.restore();
+                    done();
+                });
+        });
+        it("Negetive output test with expired authorization header", (done) => {
+            chai
+                .request(app)
+                .get('/operations/isAmstrong/153')
+                .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJBcmFiaW5kYSIsImxhc3ROYW1lIjoiTWFubmEiLCJhZ2UiOjI1LCJpYXQiOjE1ODQ0NDk3MjksImV4cCI6MTU4NDQ1MDMyOSwiYXVkIjoibG9jYWxob3N0IiwiaXNzIjoibG9jYWxob3N0IiwianRpIjoiR2x1YU0ifQ.GNWHXggfh23BPx466wLl5NdgYKw9caieLeFYmlvypz4')
+                .end((err, res) => {
+                    // console.log(res);
+                    expect(err).to.be.null;
+                    expect(res).to.have.status(403);
                     done();
                 });
         });

@@ -1,7 +1,7 @@
 const express = require("express");
 const route = express();
 
-const { first10MultiplesInputValidate, first10Multiples, stringCharacterCalcInputValidate, stringCharacterCalc, isAmstrongInputValidate, isAmstrong } = require("../controllers/operations");
+const operationsController = require("../controllers/operations");
 const { validateJWT } = require("../controllers/jwt");
 const { getBearerToken } = require("../library/headerUtils");
 
@@ -13,16 +13,16 @@ route.get('/first10Multiples/:num', async (req, res) => {
             return false;
         }
 
-        const validationData = await first10MultiplesInputValidate(req.params);
+        const validationData = await operationsController.first10MultiplesInputValidate(req.params);
 
         if (!validationData.status) {
             res.status(401).send({ "status": "ERROR", "message": validationData.message });
             return false;
         }
 
-        res.send(first10Multiples(req.params.num));
+        res.send(operationsController.first10Multiples(req.params.num));
     } catch (e) {
-        console.log(e);
+        // console.log(e);
         res.sendStatus(500);
     }
 });
@@ -35,16 +35,16 @@ route.post('/stringCharacterCalc', async (req, res) => {
             return false;
         }
 
-        const validationData = await stringCharacterCalcInputValidate(req.body);
+        const validationData = await operationsController.stringCharacterCalcInputValidate(req.body);
 
         if (!validationData.status) {
             res.status(401).send({ "status": "ERROR", "message": validationData.message });
             return false;
         }
 
-        res.send(stringCharacterCalc(req.body.string));
+        res.send(operationsController.stringCharacterCalc(req.body.string));
     } catch (e) {
-        console.log(e);
+        // console.log(e);
         res.sendStatus(500);
     }
 });
@@ -57,16 +57,16 @@ route.get('/isAmstrong/:num', async (req, res) => {
             return false;
         }
 
-        const validationData = await isAmstrongInputValidate(req.params);
+        const validationData = await operationsController.isAmstrongInputValidate(req.params);
 
         if (!validationData.status) {
             res.status(401).send({ "status": "ERROR", "message": validationData.message });
             return false;
         }
 
-        res.send(isAmstrong(req.params.num));
+        res.send(operationsController.isAmstrong(req.params.num));
     } catch (e) {
-        console.log(e);
+        // console.log(e);
         res.sendStatus(500);
     }
 });
