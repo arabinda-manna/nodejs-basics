@@ -7,7 +7,7 @@
     "dev": "nodemon",
     "test": "mocha --recursive --exit || true",
     "start": "node ./",
-    "coverage": "nyc npm run test"
+    "coverage": "npx nyc --show-process-tree npm run test"
   },
   "author": "Arabinda Manna",
   "license": "ISC",
@@ -30,6 +30,16 @@
     "exclude": [
       "index.js",
       "test/"
-    ]
+    ],
+    "check-coverage": true,
+    "per-file": true,
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "all": false,
+    "cache": true,
+    "report-dir": "./artifacts",
+    "temp-directory": "./artifacts/temp"
   }
 }
