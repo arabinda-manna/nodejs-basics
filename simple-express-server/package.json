@@ -39,7 +39,7 @@
       "text-summary"
     ],
     "all": false,
-    "cache": true,
+    "cache": false,
     "report-dir": "./artifacts",
     "temp-directory": "./artifacts/temp"
   }
