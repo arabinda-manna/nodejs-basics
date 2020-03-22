@@ -4,7 +4,7 @@ chai.use(chaiHttp);
 const app = require("../../index");
 const expect = chai.expect;
 
-const operationsController = require("../../controllers/operations");
+const operationsLib = require("../../library/operations");
 const sinon = require("sinon");
 
 describe("operations controller Integration Testing", () => {
@@ -47,7 +47,7 @@ describe("operations controller Integration Testing", () => {
                 .end((err, res) => {
                     // console.log(res);
                     expect(err).to.be.null;
-                    expect(res).to.have.status(403);
+                    expect(res).to.have.status(401);
                     done();
                 });
         });
@@ -59,13 +59,13 @@ describe("operations controller Integration Testing", () => {
                 .end((err, res) => {
                     // console.log(res);
                     expect(err).to.be.null;
-                    expect(res).to.have.status(401);
+                    expect(res).to.have.status(403);
                     done();
                 });
         });
         it("Negetive output test with throwing error", (done) => {
             const error = new Error("first10Multiples throws an error");
-            sinon.stub(operationsController, "first10Multiples").throws(error);
+            sinon.stub(operationsLib, "first10Multiples").throws(error);
             chai
                 .request(app)
                 .get('/operations/first10Multiples/1')
@@ -74,7 +74,7 @@ describe("operations controller Integration Testing", () => {
                     // console.log(res);
                     expect(err).to.be.null;
                     expect(res).to.have.status(500);
-                    operationsController.first10Multiples.restore();
+                    operationsLib.first10Multiples.restore();
                     done();
                 });
         });
@@ -86,7 +86,7 @@ describe("operations controller Integration Testing", () => {
                 .end((err, res) => {
                     // console.log(res);
                     expect(err).to.be.null;
-                    expect(res).to.have.status(403);
+                    expect(res).to.have.status(401);
                     done();
                 });
         });
@@ -121,7 +121,7 @@ describe("operations controller Integration Testing", () => {
                 .end((err, res) => {
                     // console.log(res);
                     expect(err).to.be.null;
-                    expect(res).to.have.status(403);
+                    expect(res).to.have.status(401);
                     done();
                 });
         });
@@ -137,13 +137,13 @@ describe("operations controller Integration Testing", () => {
                 .end((err, res) => {
                     // console.log(res);
                     expect(err).to.be.null;
-                    expect(res).to.have.status(401);
+                    expect(res).to.have.status(403);
                     done();
                 });
         });
         it("Negetive output test with throwing error", (done) => {
             const error = new Error("stringCharacterCalc throws an error");
-            sinon.stub(operationsController, "stringCharacterCalc").throws(error);
+            sinon.stub(operationsLib, "stringCharacterCalc").throws(error);
             chai
                 .request(app)
                 .post('/operations/stringCharacterCalc')
@@ -156,7 +156,7 @@ describe("operations controller Integration Testing", () => {
                     // console.log(res);
                     expect(err).to.be.null;
                     expect(res).to.have.status(500);
-                    operationsController.stringCharacterCalc.restore();
+                    operationsLib.stringCharacterCalc.restore();
                     done();
                 });
         });
@@ -172,7 +172,7 @@ describe("operations controller Integration Testing", () => {
                 .end((err, res) => {
                     // console.log(res);
                     expect(err).to.be.null;
-                    expect(res).to.have.status(403);
+                    expect(res).to.have.status(401);
                     done();
                 });
         });
@@ -199,7 +199,7 @@ describe("operations controller Integration Testing", () => {
                 .end((err, res) => {
                     // console.log(res);
                     expect(err).to.be.null;
-                    expect(res).to.have.status(403);
+                    expect(res).to.have.status(401);
                     done();
                 });
         });
@@ -211,13 +211,13 @@ describe("operations controller Integration Testing", () => {
                 .end((err, res) => {
                     // console.log(res);
                     expect(err).to.be.null;
-                    expect(res).to.have.status(401);
+                    expect(res).to.have.status(403);
                     done();
                 });
         });
         it("Negetive output test with throwing error", (done) => {
             const error = new Error("isAmstrong throws an error");
-            sinon.stub(operationsController, "isAmstrong").throws(error);
+            sinon.stub(operationsLib, "isAmstrong").throws(error);
             chai
                 .request(app)
                 .get('/operations/isAmstrong/153')
@@ -226,7 +226,7 @@ describe("operations controller Integration Testing", () => {
                     // console.log(res);
                     expect(err).to.be.null;
                     expect(res).to.have.status(500);
-                    operationsController.isAmstrong.restore();
+                    operationsLib.isAmstrong.restore();
                     done();
                 });
         });
@@ -238,7 +238,7 @@ describe("operations controller Integration Testing", () => {
                 .end((err, res) => {
                     // console.log(res);
                     expect(err).to.be.null;
-                    expect(res).to.have.status(403);
+                    expect(res).to.have.status(401);
                     done();
                 });
         });
