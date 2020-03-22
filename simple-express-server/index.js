@@ -21,7 +21,7 @@ const errorHandler = function (error, req, res, next) {
         resStatus = 401;
         resData = { "status": "ERROR", "message": "Please Pass a valid bearer Token in Authorization Header" };
     }else if(isCelebrate(error)){
-        console.log(error);
+        // console.log(error);
         resStatus = 403;
         resData = { "status": "ERROR", "message": error.message };
     }else{
