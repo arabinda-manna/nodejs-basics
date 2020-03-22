@@ -2,7 +2,7 @@ const chai = require("chai");
 const { assert, expect } = chai;
 const chaiJWT = require('chai-jwt');
 
-const { generateJWT, validateJWT } = require("../../controllers/jwt");
+const { generateJWT, validateJWT } = require("../../library/jwt");
 const sinon = require("sinon");
 const jwt = require('jsonwebtoken');
 
