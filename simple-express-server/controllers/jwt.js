@@ -1,23 +1,38 @@
-const jwt = require('jsonwebtoken');
-let Chance = require('chance');
-const privateKey = "88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589";
+const jwtLib = require("../library/jwt");
+const { getBearerToken } = require("../library/headerUtils");
 
-function generateJWT(object) {
-    let chance = new Chance();
-    return jwt.sign(object, privateKey, { algorithm: 'HS256', expiresIn: 600, audience: "localhost", issuer: "localhost", jwtid: chance.string({ length: 5 }) });
-}
-
-function validateJWT(token) {
+function processGenerateJWT(req, res, next){
     try {
-        payload = jwt.verify(token, privateKey);
-        return true;
+        // console.log(req.body);
+        let token = jwtLib.generateJWT(req.body);
+        res.json({ "status": "SUCCESS", "access_token": token });
     } catch (e) {
-        if (e instanceof jwt.JsonWebTokenError) {
-            return false;
-        }
-        return false;
+        // console.log(e);
+        err = new Error("Unknown");
+        next(err);
     }
 }
 
-exports.generateJWT = generateJWT;
-exports.validateJWT = validateJWT;
+function processValidateJWT(req, res, next){
+    try {
+        // console.log(req.get("Authorization"));
+        let token = getBearerToken(req);
+        // console.log(token);
+
+        if (token) {
+            if (jwtLib.validateJWT(token)) {
+                res.send({ "status": "True" });
+            } else {
+                res.send({ "status": "False" });
+            }
+        } else {
+            res.status(401).send({ "status": "ERROR", "message": "Please Pass a valid bearer Token in Authorization Header" });
+        }
+    } catch (error) {
+        // console.log(error);
+        err = new Error("Unknown");
+        next(err);
+    }
+}
+
+module.exports = {processGenerateJWT, processValidateJWT};
