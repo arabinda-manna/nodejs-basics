@@ -2,7 +2,7 @@ const express = require("express");
 const route = express();
 
 const operationsController = require("../controllers/operations");
-const { validateJWT } = require("../controllers/jwt");
+const { validateJWT } = require("../library/jwt");
 const { getBearerToken } = require("../library/headerUtils");
 const { first10MultiplesInputValidate, stringCharacterCalcInputValidate, isAmstrongInputValidate } = require("../library/operationsValidation");
 const validatePermission = (req, res, next) => {
