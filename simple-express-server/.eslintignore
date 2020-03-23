@@ -1,0 +1,7 @@
+node_modules
+test
+gulpfile.js
+server/views
+server/public
+server/apidoc
+modules/db-manager/migrations
