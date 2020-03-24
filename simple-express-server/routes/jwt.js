@@ -1,7 +1,8 @@
-const express = require("express");
+const express = require('express');
+
 const route = express();
 
-const jwtController = require("../controllers/jwt");
+const jwtController = require('../controllers/jwt');
 
 route.post('/', jwtController.processGenerateJWT);
 
