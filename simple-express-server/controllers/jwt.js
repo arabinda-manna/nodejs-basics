@@ -1,5 +1,5 @@
 const jwtLib = require('../library/jwt');
-const { getBearerToken } = require('../library/headerUtils');
+const headerUtils = require('../library/headerUtils');
 
 function processGenerateJWT(req, res, next) {
   try {
@@ -16,7 +16,7 @@ function processGenerateJWT(req, res, next) {
 function processValidateJWT(req, res, next) {
   try {
     // console.log(req.get("Authorization"));
-    const token = getBearerToken(req);
+    const token = headerUtils.getBearerToken(req);
     // console.log(token);
 
     if (token) {
