@@ -17,11 +17,11 @@ describe("stringCharacterCalc method Unit Testing", () => {
 });
 
 describe("isAmstrong method Unit Testing", () => {
-    it("Positive test amstrong num is given", async () => {
+    it("Positive test amstrong num is given", () => {
         //though router will not accept this input
         expect(isAmstrong(153)).to.be.equal("153 is a Amstrong number");
     });
-    it("Negetive test non-amstrong num is given", async () => {
+    it("Negetive test non-amstrong num is given", () => {
         //though router will not accept this input
         expect(isAmstrong(1530)).to.be.equal("1530 is not a Amstrong number");
     });
