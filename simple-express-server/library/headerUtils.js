@@ -1,21 +1,17 @@
 
-const getAuthorizationHeader = (req) => {
-    return req.get("Authorization");
-}
+const getAuthorizationHeader = (req) => req.get('Authorization');
 
 const getBearerToken = (req) => {
-    let authorization = this.getAuthorizationHeader(req);
-    if (authorization != undefined) {
-        let token = authorization.split(' ');
-        if (token[0] == "Bearer") {
-            return token[1];
-        } else {
-            return null;
-        }
-    } else {
-        return null;
+  const authorization = this.getAuthorizationHeader(req);
+  if (authorization !== undefined) {
+    const token = authorization.split(' ');
+    if (token[0] === 'Bearer') {
+      return token[1];
     }
-}
+    return null;
+  }
+  return null;
+};
 
 exports.getAuthorizationHeader = getAuthorizationHeader;
 exports.getBearerToken = getBearerToken;
