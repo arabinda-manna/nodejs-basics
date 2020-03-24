@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+// eslint-disable-next-line
 const errorHandler = function (error, req, res, next) {
   // console.log(error.message);
   let resStatus; let
