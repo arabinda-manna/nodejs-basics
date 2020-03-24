@@ -5,16 +5,15 @@ const { processFirst10Multiples, processStringCharacterCalc, processAmstrong } =
 const operations = require("../../library/operations");
 
 describe("processFirst10Multiples Controller Function Unit Testing", () => {
-    it("next should be called", async (done) => {
+    it("next should be called", () => {
         sinon.stub(operations, "first10Multiples").throws(new Error("first10Multiples throws wanted error"));
         const sinonNext = sinon.spy();
         processFirst10Multiples({}, {}, sinonNext);
         expect(sinonNext.calledOnce).to.be.true;
         operations.first10Multiples.restore();
-        done();
     });
 
-    it("res.send should be called", async (done) => {
+    it("res.send should be called",  () => {
         const req = {"params":{
             "num":1
         }};
@@ -24,21 +23,19 @@ describe("processFirst10Multiples Controller Function Unit Testing", () => {
         };
         processFirst10Multiples(req, resSpy, () => { });
         expect(sendFake.calledOnce).to.be.true;
-        done();
     });
 });
 
 describe("processStringCharacterCalc Controller Function Unit Testing", () => {
-    it("next should be called", async (done) => {
+    it("next should be called", () => {
         sinon.stub(operations, "stringCharacterCalc").throws(new Error("stringCharacterCalc throws wanted error"));
         const sinonNext = sinon.spy();
         processStringCharacterCalc({}, {}, sinonNext);
         expect(sinonNext.calledOnce).to.be.true;
         operations.stringCharacterCalc.restore();
-        done();
     });
 
-    it("res.send should be called", async (done) => {
+    it("res.send should be called", () => {
         const req = {"body":{
             "string":"NodeJs"
         }};
@@ -48,21 +45,19 @@ describe("processStringCharacterCalc Controller Function Unit Testing", () => {
         };
         processStringCharacterCalc(req, resSpy, () => { });
         expect(sendFake.calledOnce).to.be.true;
-        done();
     });
 });
 
 describe("processAmstrong Controller Function Unit Testing", () => {
-    it("next should be called", async (done) => {
+    it("next should be called", () => {
         sinon.stub(operations, "isAmstrong").throws(new Error("isAmstrong throws wanted error"));
         const sinonNext = sinon.spy();
         processAmstrong({}, {}, sinonNext);
         expect(sinonNext.calledOnce).to.be.true;
         operations.isAmstrong.restore();
-        done();
     });
 
-    it("res.send should be called", async (done) => {
+    it("res.send should be called", () => {
         const req = {
             "params": {
                 "num": 153
@@ -74,6 +69,5 @@ describe("processAmstrong Controller Function Unit Testing", () => {
         };
         processAmstrong(req, resSpy, () => { });
         expect(sendFake.calledOnce).to.be.true;
-        done();
     });
 });
